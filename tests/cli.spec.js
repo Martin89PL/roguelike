@@ -10,16 +10,31 @@ test('CLI constructor should save game object', () => {
   expect(cli.game).toBe(game);
 });
 
-test('CLI.parseLine on default should show board', () => {
+
+test('CLI should throw Error when command not found', () => {
   const game = jest.fn();
-  game.draw = jest.fn(() => '<board>');
   const cli = new CLI(game);
-  cli.log = jest.fn();
 
-  cli.parseLine(' foobar ');
+  const t = () => {
+    cli.parseLine('foobar');
+  }
 
-  expect(game.draw).toHaveBeenCalledWith(); // empty arguments
-  expect(cli.log).toBeCalledTimes(2);
-  expect(cli.log).toHaveBeenNthCalledWith(1, "<board>");
-  expect(cli.log).toHaveBeenNthCalledWith(2, "Your input was 'foobar'");
-})
+  expect(t).toThrow(Error);
+});
+
+test('CLI should react on down command', () => {
+  const game = jest.fn();
+  game.move = jest.fn();
+  game.draw = jest.fn();
+  const cli = new CLI(game);
+  cli.parseLine('down');
+  expect(cli.game.move).toBeCalledTimes(1);
+});
+
+test('Foo bar', () => {
+  const game = jest.fn();
+  const cli = new CLI(game);
+  const mockExit = jest.spyOn(process, 'exit').mockImplementation(()=>{});
+  cli.onClose();
+  expect()
+});
