@@ -9,11 +9,17 @@ export default class CLI {
   parseLine(line) {
     const trimedLine = line.trim();
     switch (trimedLine) {
-      default:
-        this.log(this.game.draw());
-        this.log(`Your input was '${trimedLine}'`);
+      case 'down':
+        this.game.move('down');
         break;
+      case 'right':
+        this.game.move('right');
+        break;
+      default:
+        throw new Error('You shall not pass!');
     }
+    this.log(this.game.draw());
+    this.log(`Your input was '${trimedLine}'`);
   }
 
   // Below methods are neccesary to run prompt in console
