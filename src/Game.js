@@ -1,5 +1,5 @@
 import Hero from "./Hero";
-import { tsMethodSignature } from "@babel/types";
+import Coords from "./Coords";
 
 const floor = '.';
 
@@ -11,7 +11,7 @@ export default class Game {
   constructor() {
     this.board = [];
     this.createBoard(); 
-    this.setHero(new Hero());
+    this.setHero(new Hero('@', new Coords()));
   }
 
   createBoard() {
@@ -25,10 +25,12 @@ export default class Game {
   }
 
   move(direction) {
-    let heroCoords = this.hero.getCoords();
-    this.board[heroCoords.getY()][heroCoords.getX()] = '.';
+    this.setBoardSetHeroPosition('.');
   
     switch(direction) {
+      case 'up':
+        this.hero.moveUp();
+        break;
       case 'down':
         this.hero.moveDown();
         break;
@@ -36,18 +38,20 @@ export default class Game {
         this.hero.moveRight();
         break;
     }
-    heroCoords = this.hero.getCoords();
-    this.board[heroCoords.getY()][heroCoords.getX()] = this.hero.getSign();
+    this.setBoardSetHeroPosition(this.hero.getSign());
   }
 
   setHero(hero) {
     this.hero = hero;
-    const heroCoords = this.hero.getCoords();
-    this.board[heroCoords.getY()][heroCoords.getX()] = this.hero.getSign();
+    this.setBoardSetHeroPosition(this.hero.getSign());
   }
 
   getHero() {
     return this.hero;
+  }
+
+  setBoardSetHeroPosition(sign) {
+    this.board[this.hero.getCoords().getY()][this.hero.getCoords().getX()] = sign;
   }
 
   draw() {
