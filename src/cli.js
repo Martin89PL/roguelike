@@ -1,4 +1,5 @@
 import readline from 'readline';
+import { Moves } from './Moves';
 
 export default class CLI {
 
@@ -8,9 +9,13 @@ export default class CLI {
 
   parseLine(line) {
     const trimedLine = line.trim();
+
     switch (trimedLine) {
       case 'down':
         this.game.move('down');
+        break;
+      case 'up':
+        this.game.move('up');
         break;
       case 'right':
         this.game.move('right');
