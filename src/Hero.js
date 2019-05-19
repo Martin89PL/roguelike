@@ -2,9 +2,9 @@ import Coords from './Coords';
 
 export default class Hero {
 
-    constructor(sign = '@') {
+    constructor(sign = '@', coords = new Coords(0, 0)) {
         this.sign = sign;
-        this.coords = new Coords();
+        this.coords = coords;
     }
 
     getSign() {
@@ -21,5 +21,13 @@ export default class Hero {
 
     moveRight() {
         this.coords.setX(this.coords.getX() + 1);
+    }
+
+    moveUp() {
+        this.coords.setY(this.coords.getY() - 1);
+    }
+
+    moveLeft() {
+        this.coords.setX(this.coords.getX() - 1);
     }
 }
