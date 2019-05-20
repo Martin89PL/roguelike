@@ -1,5 +1,6 @@
 import Hero from "./Hero";
 import Coords from "./Coords";
+import { Moves } from "./Moves";
 
 const floor = '.';
 
@@ -25,18 +26,26 @@ export default class Game {
   }
 
   move(direction) {
+
+    if(!this.canMove(direction)) {
+      return;
+    }
+    
     this.setBoardSetHeroPosition('.');
   
-    switch(direction) {
-      case 'up':
+    switch(direction.toUpperCase()) {
+      case 'UP':
         this.hero.moveUp();
         break;
-      case 'down':
+      case 'DOWN':
         this.hero.moveDown();
         break;
-      case 'right':
+      case 'RIGHT':
         this.hero.moveRight();
         break;
+      case 'LEFT':
+        this.hero.moveLeft();
+        break;  
     }
     this.setBoardSetHeroPosition(this.hero.getSign());
   }
@@ -52,6 +61,19 @@ export default class Game {
 
   setBoardSetHeroPosition(sign) {
     this.board[this.hero.getCoords().getY()][this.hero.getCoords().getX()] = sign;
+  }
+
+  canMove(direction) {
+    let position = -1;
+    switch(direction) {
+      case 'LEFT':
+          position = this.hero.getCoords().getX() - 1;
+          break;
+    }
+    
+
+
+    return (position >= 0) ? true : false;
   }
 
   draw() {
