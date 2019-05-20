@@ -34,7 +34,7 @@ describe('testing Game class', () => {
     expect(typeof game.setHero).toBe('function');
   });
 
-  test('Game board should move hero down and right once', () => {
+  test('Game board should move hero down', () => {
     game.move('down');
     game.move('right');
     const hero = game.getHero();
@@ -50,6 +50,11 @@ describe('testing Game class', () => {
     const coords = hero.getCoords();
     expect(coords.getX()).toBe(0);
     expect(coords.getY()).toBe(0);
+  });
+
+  test('If Hero go over the board boundaries he should stay at his old position', () => {
+    const canMove = game.canMove('LEFT');
+    expect(canMove).toEqual(false);
   });
 
 });
