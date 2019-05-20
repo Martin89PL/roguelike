@@ -10,19 +10,12 @@ export default class CLI {
   parseLine(line) {
     const trimedLine = line.trim();
 
-    switch (trimedLine) {
-      case 'down':
-        this.game.move('down');
-        break;
-      case 'up':
-        this.game.move('up');
-        break;
-      case 'right':
-        this.game.move('right');
-        break;
-      default:
-        throw new Error('You shall not pass!');
+  
+    if(!Object.keys(Moves).includes(trimedLine.toUpperCase())) {
+      throw new Error('Not recognize command!');
     }
+
+    this.game.move(trimedLine);
     this.log(this.game.draw());
     this.log(`Your input was '${trimedLine}'`);
   }
