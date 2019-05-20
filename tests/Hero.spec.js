@@ -24,27 +24,33 @@ describe('testing hero class', () => {
         expect(coords.getY()).toBe(0);
     });
     
-    test('Hero should move down and right once', () => {
+    test('Hero should move down onve', () => {
         hero.moveDown();
-        hero.moveRight();
         let coords = hero.getCoords();
-        expect(coords.getX()).toBe(1);
+        expect(coords.getX()).toBe(0);
         expect(coords.getY()).toBe(1);
     });
 
-    test('Hero should move down and move up once', () => {
-        hero.moveDown();
+    test('Hero should move up once', () => {
+        hero = new Hero('@', new Coords(0, 1));
         hero.moveUp();
         let coords = hero.getCoords();
-        expect(coords.getX()).toBe(1);
-        expect(coords.getY()).toBe(1);
+        expect(coords.getX()).toBe(0);
+        expect(coords.getY()).toBe(0);
     });
 
-    test('Hero should move right and move left once', () => {
+    test('Hero should move right once', () => {
         hero.moveRight();
-        hero.moveLeft();
         let coords = hero.getCoords();
         expect(coords.getX()).toBe(1);
-        expect(coords.getY()).toBe(1);
+        expect(coords.getY()).toBe(0);
+    });
+
+    test('Hero should move left once', () => {
+        hero = new Hero('@', new Coords(1, 0));
+        hero.moveLeft();
+        let coords = hero.getCoords();
+        expect(coords.getX()).toBe(0);
+        expect(coords.getY()).toBe(0);
     })
 });
